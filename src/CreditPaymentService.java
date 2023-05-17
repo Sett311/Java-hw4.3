@@ -1,10 +1,10 @@
 public class CreditPaymentService {
-    public float calculate(int credit, int year) {
+    public double calculate(int credit, int year) {
         short months = (short) (year * 12);
         float interestRate = 9.99F;
-        float i = interestRate /100 * 12;
-        double payment = credit * Math.pow(i, months) / (1 -  Math.pow(1 + i, -months));
-        return (float) payment;
+        double i = Math.pow(1 + (interestRate /100 / 12), months);
+        double payment = Math.ceil(credit * (interestRate / 100 / 12 * i) / (i -1));
+        return payment;
     }
 }
 // А=К*(П/(1+П)-М-1), где К – сумма кредита, П – процентная ставка, М – количество месяцев
